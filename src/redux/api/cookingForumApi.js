@@ -17,15 +17,30 @@ export const cookingForumApi = createApi({
     endpoints: (builder) => ({
         registerUser: builder.mutation({
             query: (body) => ({
-                url: '/register',
+                url: '/auth/register',
                 method: 'POST',
                 body: body,
             }),
         }),
+        loginUser: builder.mutation({
+            query: (body) => ({
+                url: '/auth/authenticate',
+                method: 'POST',
+                body: body
+            })
+        }),
+        profile: builder.query({
+            query: () => ({
+                url: '/profile',
+                method: 'GET'
+            })
+        })
     })
 });
 
 
 export const {
-    useRegisterUserMutation
+    useRegisterUserMutation,
+    useLoginUserMutation,
+    useProfileQuery
 } = cookingForumApi;
