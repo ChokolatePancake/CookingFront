@@ -20,6 +20,7 @@ export const cookingForumApi = createApi({
                 url: '/auth/register',
                 method: 'POST',
                 body: body,
+                formData: true,
             }),
         }),
         loginUser: builder.mutation({

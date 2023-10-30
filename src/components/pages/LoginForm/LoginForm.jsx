@@ -3,6 +3,7 @@ import {useLoginUserMutation} from "../../../redux/api/cookingForumApi";
 import {useDispatch, useSelector} from "react-redux";
 import {loginSuccess} from "../../../redux/features/authSlice";
 import {Navigate} from "react-router-dom";
+import 'filepond/dist/filepond.min.css';
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -22,7 +23,7 @@ const LoginForm = () => {
                 setHasError(true);
             }
             else {
-                response.unwrap().then((data) => dispatch(loginSuccess(data.token)));
+                response.unwrap().then((data) => dispatch(loginSuccess(data.token))).catch((e) => setHasError(true));
             }
         }
     }
@@ -34,8 +35,8 @@ const LoginForm = () => {
             <div>{hasError ? 'Incorrect password or email.' : ''}</div>
             <h1>Login</h1>
             <form onSubmit={handleLogin}>
-                <input type="email" placeholder="Email"/>
-                <input type="password" placeholder="Password"/>
+                <input type="email" placeholder="Email" required onChange={(e) => setEmail(e.target.value)}/>
+                <input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)}/>
                 <button type="submit">Log In</button>
             </form>
         </div>
