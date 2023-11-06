@@ -14,19 +14,20 @@ const RegisterForm = () => {
     const [hasError, setHasError] = useState(false);
     const [nickName, setNickName] = useState('');
     const [password, setPassword] = useState('');
-    const [picture, setPicture] = useState('');
+    const [picture, setPicture] = useState(null);
     const [registerUser, {isLoading, error}] = useRegisterUserMutation();
     const dispatch = useDispatch();
     const isAuth = useSelector(state => state.auth.isAuthenticated);
     registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileEncode, FilePondPluginImagePreview);
     const handleRegister = (e) => {
         e.preventDefault();
-        console.log(picture);
         const formData = new FormData();
         formData.append('email', email);
         formData.append('password', password);
         formData.append('nickName', nickName);
-        formData.append('picture', JSON.stringify(picture));
+        if (picture) {
+            formData.append('picture', JSON.stringify(picture));
+        }
         const response = registerUser(formData);
         if (!isLoading) {
             console.log(error)

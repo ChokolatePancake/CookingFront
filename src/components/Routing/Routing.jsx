@@ -5,6 +5,9 @@ import RegisterForm from "../pages/RegisterForm/RegisterForm";
 import LoginForm from "../pages/LoginForm/LoginForm";
 import Profile from "../pages/Profile/Profile";
 import PrivateRoute from "./PrivateRouting/PrivateRoute";
+import EditProfile from "../pages/Profile/EditProfile/EditProfile";
+import AddRecipeForm from "../pages/AddRecipeForm/AddRecipeForm";
+import Recipe from "../pages/Recipe/Recipe";
 
 const Routing = () => {
     return (
@@ -17,6 +20,17 @@ const Routing = () => {
                     <Profile/>
                 </PrivateRoute>
             }/>
+            <Route path="/profile/edit" element={
+                <PrivateRoute>
+                    <EditProfile/>
+                </PrivateRoute>
+            }/>
+            <Route path="/recipe/add" element={
+                <PrivateRoute>
+                    <AddRecipeForm/>
+                </PrivateRoute>
+            }/>
+            <Route path="/recipe/:id" element={<Recipe />} />
         </Routes>
     );
 };
