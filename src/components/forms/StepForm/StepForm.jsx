@@ -6,17 +6,17 @@ import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import {usePublishRecipeMutation, useStepAddMutation} from "../../../redux/api/cookingForumApi";
 import {useDispatch, useSelector} from "react-redux";
-import {Navigate} from "react-router-dom";
 import {addStep, resetSteps} from "../../../redux/features/addRecipeSlice";
+import { useNavigate } from 'react-router-dom';
 
 const StepForm = ({number, recipeId}) => {
     const [picture, setPicture] = useState(null);
     const [text, setText] = useState('');
-    const [redirectToRecipe, setRedirectToRecipe] = useState(false);
     const [addRecipeStep, {isLoading}] = useStepAddMutation();
     const [publishRecipe, publishRecipeData] = usePublishRecipeMutation();
     const countSteps = useSelector(state => state.addRecipe.countSteps);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileEncode, FilePondPluginImagePreview);
     const addNewStep = (e, finish = false) => {
         e.preventDefault();
@@ -34,13 +34,10 @@ const StepForm = ({number, recipeId}) => {
         else {
             const publishResponse = publishRecipe(recipeId);
             if (!publishRecipeData.isLoading) {
-                dispatch(resetSteps());
-                setRedirectToRecipe(true);
+                dispatch(resetSteps(recipeId));
+                navigate(`/recipe/${recipeId}`);
             }
         }
-    }
-    if (redirectToRecipe) {
-        return <Navigate to={`/recipe/${recipeId}`} />
     }
     return (
         <div>

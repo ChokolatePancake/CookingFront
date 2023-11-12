@@ -1,15 +1,17 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {useParams} from "react-router-dom";
 import {
-    useAddCommentMutation,
+    useAddActivityMutation,
+    useAddCommentMutation, useExistActivityQuery,
     useGetCommentsQuery,
     useProfileQuery,
-    useRecipeQuery
-} from "../../../redux/api/cookingForumApi";
+    useRecipeQuery,
+} from '../../../redux/api/cookingForumApi';
 import {CircularProgress} from "@mui/material";
 import RecipeCommentBox from "../../UI/RecipeCommentBox/RecipeCommentBox";
 import {useSelector} from "react-redux";
 import RecipeAddToFavorite from "../../RecipeAddToFavorite/RecipeAddToFavorite";
+import RecipeData from './RecipeData/RecipeData';
 
 const Recipe = () => {
     let {id} = useParams();
@@ -64,26 +66,10 @@ const Recipe = () => {
            },
        });
     }
-    // console.log(comments.data);
     return (
         <div>
             <RecipeAddToFavorite recipeId={id} />
-            <h1>{data.name}</h1>
-            {data.picture ? <img src={'http://localhost:8080/' + data.picture} alt=""/> : ''}
-            <div>Time: {data.time}</div>
-            <div>Ingredients: {data.ingredients}</div>
-            <div>Date: {data.date}</div>
-            <div>Category: {data.category.join(', ')}</div>
-            <div>Author: {data.authorNickname}</div>
-            {
-                data.steps.map(step =>
-                    <div key={step.number}>
-                        <div>{step.number}</div>
-                        {step.picture ? <img src={'http://localhost:8080/' + step.picture} alt=""/> : ''}
-                        <p>{step.text}</p>
-                    </div>
-                )
-            }
+            <RecipeData recioeId={id} data={data} userData={userData} />
             <div>
                 <RecipeCommentBox comments={commentsData} currentUser={currentUser} onSubmit={(e) => handleAddComment(e)} />
             </div>

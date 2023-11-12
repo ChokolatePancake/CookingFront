@@ -127,6 +127,12 @@ export const cookingForumApi = createApi({
                 method: 'GET'
             }),
         }),
+        addActivity: builder.mutation({
+            query: (recipeId) => ({
+                url: `/activity/${recipeId}/create`,
+                method: 'POST'
+            }),
+        })
     })
 });
 
@@ -147,5 +153,6 @@ export const {
     useRemoveFavoriteMutation,
     useGetFavoritesQuery,
     useIsFavoriteQuery,
-    useSearchRecipeQuery
+    useSearchRecipeQuery,
+    useAddActivityMutation
 } = cookingForumApi;

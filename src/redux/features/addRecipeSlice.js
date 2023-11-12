@@ -1,9 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
-
 const initialState = {
     countSteps: 0,
 }
-
 const addRecipeSlice = createSlice({
     name: 'addRecipe',
     initialState,
