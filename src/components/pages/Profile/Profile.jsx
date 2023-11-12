@@ -10,7 +10,6 @@ const Profile = () => {
     if (isLoading) {
         return <CircularProgress />
     }
-    const picture = data.picture;
     return (
         <div>
             <h1>Profile</h1>
