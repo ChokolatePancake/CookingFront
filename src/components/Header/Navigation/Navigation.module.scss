@@ -1,0 +1,19 @@
+.navigation {
+  padding-right: 60px;
+}
+
+.item {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  color: $black;
+  text-decoration: none;
+  &:not(:last-child) {
+    margin-right: 35px;
+  }
+  &:hover {
+    transition: all ease-in-out .7s;
+    color: $green;
+  }
+}

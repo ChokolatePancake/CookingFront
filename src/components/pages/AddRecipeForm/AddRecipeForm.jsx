@@ -8,6 +8,7 @@ import {useRecipeAddMutation} from "../../../redux/api/cookingForumApi";
 import {useDispatch, useSelector} from "react-redux";
 import {addStep} from "../../../redux/features/addRecipeSlice";
 import StepForm from "../../forms/StepForm/StepForm";
+import RecipeCategorySelect from "../../UI/RecipeCategorySelect/RecipeCategorySelect";
 
 const AddRecipeForm = () => {
     registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileEncode, FilePondPluginImagePreview);
@@ -17,6 +18,7 @@ const AddRecipeForm = () => {
     const [cookingTime, setCookingTime] = useState(0);
     const [isAddedRecipe, setIsAddedRecipe] = useState(false);
     const [recipeId, setRecipeId] = useState(null);
+    const [categories, setCategories] = useState([]);
     let [steps, setSteps] = useState(0);
     const [addRecipe, {isLoading}] = useRecipeAddMutation();
     const countSteps = useSelector(state => state.addRecipe.countSteps);
@@ -32,7 +34,8 @@ const AddRecipeForm = () => {
                 picture,
                 name,
                 ingredients,
-                time: cookingTime
+                time: cookingTime,
+                category: categories
             });
             response.unwrap().then((data) => setRecipeId(data.id));
             if (!isLoading) {
@@ -49,6 +52,7 @@ const AddRecipeForm = () => {
                 <input required type="text" placeholder='Name' onChange={(e) => setName(e.target.value)} />
                 <textarea required placeholder='Ingredients' onChange={(e) => setIngredients(e.target.value)} />
                 <input required type="number" placeholder='Cooking time' onChange={(e) => setCookingTime(e.target.value)}/>
+                <RecipeCategorySelect defaultValue={categories} onChange={(e) =>  setCategories(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)} />
                 <FilePond
                     labelIdle='Drag & Drop your account picture or <span class="filepond--label-action"> Browse </span>'
                     allowMultiple={false}

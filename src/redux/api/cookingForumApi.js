@@ -14,7 +14,7 @@ export const cookingForumApi = createApi({
             return headers;
         }
     }),
-    tagTypes: ['profile'],
+    tagTypes: ['profile', 'comment', 'favorite'],
     endpoints: (builder) => ({
         registerUser: builder.mutation({
             query: (body) => ({
@@ -77,7 +77,56 @@ export const cookingForumApi = createApi({
                 url: '/profile/recipes',
                 method: 'GET'
             })
-        })
+        }),
+        addComment: builder.mutation({
+            query: ({id, body}) => ({
+                url: `/recipe/${id}/comment/add`,
+                method: 'POST',
+                body: body
+            }),
+            invalidatesTags: ['comment']
+        }),
+        getComments: builder.query({
+            query: (id) => ({
+                url: `/recipe/${id}/comments`,
+                method: 'GET'
+            }),
+            providesTags: ['comment']
+        }),
+        addToFavorite: builder.mutation({
+            query: (id) => ({
+                url: `/recipe/${id}/favorite/add`,
+                method: 'POST'
+            }),
+            invalidatesTags: ['favorite']
+        }),
+        removeFavorite: builder.mutation({
+            query: (id) => ({
+                url: `/recipe/${id}/favorite/remove`,
+                method: 'POST'
+            }),
+            invalidatesTags: ['favorite']
+        }),
+        getFavorites: builder.query({
+            query: () => ({
+                url: '/recipe/favorites',
+                method: 'GET'
+            }),
+            providesTags: ['favorite']
+        }),
+        isFavorite: builder.query({
+            query: (id) => ({
+                url: `/recipe/${id}/favorite`,
+                method: 'GET'
+            }),
+            providesTags: ['favorite']
+        }),
+        searchRecipe: builder.query({
+            query: (title) => ({
+                url: `/recipe/search/${title}`,
+                method: 'GET'
+            }),
+        }),
     })
 });
 
@@ -91,5 +140,12 @@ export const {
     useStepAddMutation,
     usePublishRecipeMutation,
     useRecipeQuery,
-    useProfileRecipesQuery
+    useProfileRecipesQuery,
+    useAddCommentMutation,
+    useGetCommentsQuery,
+    useAddToFavoriteMutation,
+    useRemoveFavoriteMutation,
+    useGetFavoritesQuery,
+    useIsFavoriteQuery,
+    useSearchRecipeQuery
 } = cookingForumApi;

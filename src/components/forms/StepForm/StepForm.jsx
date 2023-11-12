@@ -39,9 +39,9 @@ const StepForm = ({number, recipeId}) => {
             }
         }
     }
-    // if (redirectToRecipe && !publishRecipeData.isLoading) {
-    //     return <Navigate to={`/recipe/${recipeId}`} />
-    // }
+    if (redirectToRecipe) {
+        return <Navigate to={`/recipe/${recipeId}`} />
+    }
     return (
         <div>
             <div>{number}</div>

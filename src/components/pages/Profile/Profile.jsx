@@ -3,13 +3,13 @@ import {useProfileQuery} from "../../../redux/api/cookingForumApi";
 import {CircularProgress} from "@mui/material";
 import {Link} from "react-router-dom";
 import ProfileRecipes from "./ProfileRecipes/ProfileRecipes";
+import ProfileFavorite from "./ProfileFavorite/ProfileFavorite";
 
 const Profile = () => {
     const {data, isLoading, error} = useProfileQuery();
     if (isLoading) {
         return <CircularProgress />
     }
-    console.log(data);
     const picture = data.picture;
     return (
         <div>
@@ -20,6 +20,7 @@ const Profile = () => {
             <div>Description: {data.description}</div>
             <Link to='/profile/edit'>Edit</Link>
             <ProfileRecipes />
+            <ProfileFavorite />
         </div>
     );
 };

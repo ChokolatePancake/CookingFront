@@ -1,1 +1,15 @@
 @import-normalize;
+@import "scss/variables";
+@import "scss/typography";
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+input,textarea {
+  width:100%;
+  display:block;
+}
+
+a.active {
+  color: $green;
+}
