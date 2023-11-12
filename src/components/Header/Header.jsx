@@ -11,7 +11,7 @@ const Header = () => {
   const isAuth = useSelector(state => state.auth.isAuthenticated);
     return (
         <div className={styles.header}>
-            <img className={styles.logo} src={Logo} alt="logo"/>
+            <Link to={"/"}><img className={styles.logo} src={Logo} alt="logo"/></Link>
             <Search />
             <Navigation />
           {isAuth ? <ProfileLink /> : <Link to={'/login'}>Login</Link>}

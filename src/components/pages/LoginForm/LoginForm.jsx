@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useLoginUserMutation} from "../../../redux/api/cookingForumApi";
 import {useDispatch, useSelector} from "react-redux";
 import {loginSuccess} from "../../../redux/features/authSlice";
-import {Navigate} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import 'filepond/dist/filepond.min.css';
 
 const LoginForm = () => {
@@ -38,6 +38,7 @@ const LoginForm = () => {
                 <input type="email" placeholder="Email" required onChange={(e) => setEmail(e.target.value)}/>
                 <input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)}/>
                 <button type="submit">Log In</button>
+                <Link to={"/register"}>SingUp</Link>
             </form>
         </div>
     );

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useRegisterUserMutation} from "../../../redux/api/cookingForumApi";
 import {useDispatch, useSelector} from "react-redux";
 import {loginSuccess} from "../../../redux/features/authSlice";
-import {Navigate} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import { FilePond, registerPlugin } from 'react-filepond';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
@@ -63,6 +63,7 @@ const RegisterForm = () => {
                     onupdatefiles={file => file.length != 0 ? setPicture({name: file[0].filename, base64: file[0].getFileEncodeBase64String()}) : setPicture(null) }
                 />
                 <button type="submit">Sign Up</button>
+                <Link to={"/login"}>LogIn</Link>
             </form>
         </div>
     );
