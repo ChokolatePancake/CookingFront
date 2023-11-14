@@ -12,6 +12,7 @@ import RecipeCommentBox from "../../UI/RecipeCommentBox/RecipeCommentBox";
 import {useSelector} from "react-redux";
 import RecipeAddToFavorite from "../../RecipeAddToFavorite/RecipeAddToFavorite";
 import RecipeData from './RecipeData/RecipeData';
+import Avatar from '../../../assets/icons/avatar.png'
 
 const Recipe = () => {
     let {id} = useParams();
@@ -32,6 +33,7 @@ const Recipe = () => {
             currentUserFullName: userData.data.nickName,
         };
     }
+    console.log(userData)
     const buildCommentData = (comment) => {
         let replies = [];
         if (comment.replies) {
@@ -43,7 +45,7 @@ const Recipe = () => {
             userId: comment.authorId,
             comId: comment.id,
             fullName: comment.authorNickname,
-            avatarUrl: comment.picture,
+            avatarUrl: comment.picture ? 'http://localhost:8080/'+ comment.picture : Avatar,
             userProfile: null,
             text: comment.message,
             replies: replies
