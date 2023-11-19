@@ -35,12 +35,12 @@ const LoginForm = () => {
         <div className={styles.login}>
             <div>{hasError ? 'Incorrect password or email.' : ''}</div>
             <h1>Login</h1>
-            <form onSubmit={handleLogin}>
-                <input type="email" placeholder="Email" required onChange={(e) => setEmail(e.target.value)}/>
-                <input type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)}/>
+            <form onSubmit={handleLogin} className={styles.form}>
+                <input className={styles.input} type="email" placeholder="Email" required onChange={(e) => setEmail(e.target.value)}/>
+                <input className={styles.input} type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)}/>
                 <div className={styles.item}>
-                    <button type="submit">Log In</button>
-                    <Link to={"/register"}>SingUp</Link>
+                    <button type="submit" className={styles.button}>Log In</button>
+                    <div className={styles.signup}>Haven't account? <Link to={"/register"}>SignUp</Link></div>
                 </div>
             </form>
         </div>

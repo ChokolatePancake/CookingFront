@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useProfileQuery} from "../../../redux/api/cookingForumApi";
+import {cookingForumApi, useProfileQuery} from "../../../redux/api/cookingForumApi";
 import {CircularProgress} from "@mui/material";
 import {Link} from "react-router-dom";
 import ProfileRecipes from "./ProfileRecipes/ProfileRecipes";
@@ -15,7 +15,8 @@ const Profile = () => {
     }
     const handleLogout = (e) => {
         e.preventDefault();
-                dispatch(logoutSuccess());
+        dispatch(cookingForumApi.util.resetApiState());
+        dispatch(logoutSuccess());
     }
     return (
         <div>
@@ -26,6 +27,7 @@ const Profile = () => {
             <div>NickName: {data.nickName}</div>
             <div>Description: {data.description}</div>
             <Link to='/profile/edit'>Edit</Link>
+            <Link to='/recipe/add'>Add Recipe</Link>
             <ProfileRecipes />
             <ProfileFavorite />
         </div>

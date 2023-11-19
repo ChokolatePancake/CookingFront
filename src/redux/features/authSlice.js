@@ -26,7 +26,6 @@ const authSlice = createSlice({
             state.isAuthenticated = false;
             state.token = null;
             Cookies.remove('token');
-            window.location.replace('/login');
         },
     },
     extraReducers: {},
