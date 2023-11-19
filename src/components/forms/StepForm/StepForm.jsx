@@ -8,6 +8,7 @@ import {usePublishRecipeMutation, useStepAddMutation} from "../../../redux/api/c
 import {useDispatch, useSelector} from "react-redux";
 import {addStep, resetSteps} from "../../../redux/features/addRecipeSlice";
 import { useNavigate } from 'react-router-dom';
+import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 
 const StepForm = ({number, recipeId}) => {
     const [picture, setPicture] = useState(null);
@@ -17,7 +18,8 @@ const StepForm = ({number, recipeId}) => {
     const countSteps = useSelector(state => state.addRecipe.countSteps);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileEncode, FilePondPluginImagePreview);
+    const [isPictureLoading, setIsPictureLoading] = useState(false);
+    registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileEncode, FilePondPluginImagePreview, FilePondPluginFileValidateSize);
     const addNewStep = (e, finish = false) => {
         e.preventDefault();
         const response = addRecipeStep({
@@ -53,6 +55,10 @@ const StepForm = ({number, recipeId}) => {
                     stylePanelLayout='integrated'
                     allowFileEncode={true}
                     allowImagePreview={true}
+                    allowFileSizeValidation={true}
+                    maxFileSize={'19MB'}
+                    onaddfile={() => setIsPictureLoading(false)}
+                    onaddfilestart={() => setIsPictureLoading(true)}
                     onupdatefiles={file => file.length != 0 ? setPicture(JSON.stringify({name: file[0].filename, base64: file[0].getFileEncodeBase64String()})) : setPicture(null) }
                 />
                 <textarea placeholder='Description' onChange={(e) => setText(e.target.value)} />

@@ -8,6 +8,7 @@ import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 
 const RegisterForm = () => {
     const [email, setEmail] = useState('');
@@ -18,7 +19,8 @@ const RegisterForm = () => {
     const [registerUser, {isLoading, error}] = useRegisterUserMutation();
     const dispatch = useDispatch();
     const isAuth = useSelector(state => state.auth.isAuthenticated);
-    registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileEncode, FilePondPluginImagePreview);
+    const [isPictureLoading, setIsPictureLoading] = useState(false);
+    registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileEncode, FilePondPluginImagePreview, FilePondPluginFileValidateSize);
     const handleRegister = (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -60,9 +62,13 @@ const RegisterForm = () => {
                     stylePanelLayout='integrated'
                     allowFileEncode={true}
                     allowImagePreview={true}
+                    allowFileSizeValidation={true}
+                    maxFileSize={'19MB'}
+                    onaddfile={() => setIsPictureLoading(false)}
+                    onaddfilestart={() => setIsPictureLoading(true)}
                     onupdatefiles={file => file.length != 0 ? setPicture({name: file[0].filename, base64: file[0].getFileEncodeBase64String()}) : setPicture(null) }
                 />
-                <button type="submit">Sign Up</button>
+                <button type="submit" disabled={isPictureLoading}>Sign Up</button>
                 <Link to={"/login"}>LogIn</Link>
             </form>
         </div>
