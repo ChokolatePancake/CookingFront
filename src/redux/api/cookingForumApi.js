@@ -76,7 +76,9 @@ export const cookingForumApi = createApi({
             query: () => ({
                 url: '/profile/recipes',
                 method: 'GET'
-            })
+            }),
+            providesTags: ['profile']
+
         }),
         addComment: builder.mutation({
             query: ({id, body}) => ({
@@ -119,7 +121,7 @@ export const cookingForumApi = createApi({
                 url: `/recipe/${id}/favorite`,
                 method: 'GET'
             }),
-            providesTags: ['favorite']
+            providesTags: ['favorite', 'profile']
         }),
         searchRecipe: builder.query({
             query: (title) => ({

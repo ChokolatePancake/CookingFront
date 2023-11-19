@@ -3,6 +3,7 @@ import {FilePond, registerPlugin} from "react-filepond";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginFileEncode from "filepond-plugin-file-encode";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import {useRecipeAddMutation} from "../../../redux/api/cookingForumApi";
 import {useDispatch, useSelector} from "react-redux";
@@ -11,7 +12,7 @@ import StepForm from "../../forms/StepForm/StepForm";
 import RecipeCategorySelect from "../../UI/RecipeCategorySelect/RecipeCategorySelect";
 
 const AddRecipeForm = () => {
-    registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileEncode, FilePondPluginImagePreview);
+    registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileEncode, FilePondPluginImagePreview, FilePondPluginFileValidateSize);
     const [picture, setPicture] = useState(null);
     const [name, setName] = useState('');
     const [ingredients, setIngredients] = useState('');
@@ -22,6 +23,7 @@ const AddRecipeForm = () => {
     let [steps, setSteps] = useState(0);
     const [addRecipe, {isLoading}] = useRecipeAddMutation();
     const countSteps = useSelector(state => state.addRecipe.countSteps);
+    const [isPictureLoading, setIsPictureLoading] = useState(false);
     const dispatch = useDispatch();
     let stepForms = [];
     for (let i = 0; i < countSteps; i++) {
@@ -63,11 +65,15 @@ const AddRecipeForm = () => {
                     stylePanelLayout='integrated'
                     allowFileEncode={true}
                     allowImagePreview={true}
+                    allowFileSizeValidation={true}
+                    maxFileSize={'19MB'}
+                    onaddfile={() => setIsPictureLoading(false)}
+                    onaddfilestart={() => setIsPictureLoading(true)}
                     onupdatefiles={file => file.length != 0 ? setPicture(JSON.stringify({name: file[0].filename, base64: file[0].getFileEncodeBase64String()})) : setPicture(null) }
                 />
                 {
                     countSteps == 0
-                    ? <button type='submit'>Add step</button>
+                        ? <button type='submit' disabled={isPictureLoading}>Add step</button>
                         : ''
                 }
             </form>

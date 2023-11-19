@@ -14,7 +14,7 @@ const Header = () => {
             <Link to={"/"}><img className={styles.logo} src={Logo} alt="logo"/></Link>
             <Search />
             <Navigation />
-          {isAuth ? <ProfileLink /> : <Link to={'/login'}>Login</Link>}
+          {isAuth ? <ProfileLink /> : <Link to={'/login'} className={styles.login}>Login</Link>}
         </div>
     );
 };
