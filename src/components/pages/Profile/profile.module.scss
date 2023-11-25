@@ -1,0 +1,58 @@
+.allitems {
+  font-size: 20px;
+  display: flex;
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logout {
+  margin-left: 90%;
+  margin-top: 15px;
+  background-color: $orange;
+    &:hover {
+      background-color: $peach;
+      transition: all .8s ease-in-out;
+    }
+}
+
+.image {
+  width: 300px;
+  border-radius: 8%;
+}
+
+.buttoncontainer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+}
+
+.button {
+  a {
+    text-decoration: none;
+    color: $white;
+    text-transform: uppercase;
+    font-size: 20px;
+    padding: 8px 12px;
+    background-color: $light-green;
+    border-radius: 15px;
+    &:hover {
+      background-color: $green;
+      transition: all .8s ease-in-out;
+    }
+  }
+  &:not(:first-child) {
+    margin-left: 15px;
+  }
+}

@@ -12,7 +12,7 @@ import RecipeCommentBox from "../../UI/RecipeCommentBox/RecipeCommentBox";
 import {useSelector} from "react-redux";
 import RecipeAddToFavorite from "../../RecipeAddToFavorite/RecipeAddToFavorite";
 import RecipeData from './RecipeData/RecipeData';
-import Avatar from '../../../assets/icons/avatar.png'
+import Avatar from '../../../assets/icons/avatar.png';
 
 const Recipe = () => {
     let {id} = useParams();

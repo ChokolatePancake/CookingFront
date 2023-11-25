@@ -33,4 +33,12 @@ button {
   color: $white;
   font-weight: 500;
   font-size: 18px;
+  background-color: $green;
+  &:hover {
+    background-color: $dark-green;
+    transition: all .8s ease-in-out;
+  }
+  &:disabled {
+    background-color: $gray-green;
+  }
 }

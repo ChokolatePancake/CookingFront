@@ -64,7 +64,8 @@ export const cookingForumApi = createApi({
             query: (id) => ({
                 url: `/recipe/${id}/publish`,
                 method: 'POST'
-            })
+            }),
+            invalidatesTags: ['profile']
         }),
         recipe: builder.query({
             query: (id) => ({

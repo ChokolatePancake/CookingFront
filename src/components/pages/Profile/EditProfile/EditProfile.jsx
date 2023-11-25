@@ -8,6 +8,7 @@ import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import {useDispatch} from "react-redux";
 import {Navigate} from "react-router-dom";
+import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 
 const EditProfile = () => {
     const {data, isLoading, error} = useProfileQuery();
@@ -15,7 +16,8 @@ const EditProfile = () => {
     const [description, setDescription] = useState(null);
     const [dataUpdated, setDataUpdated] = useState(false);
     const [profileEdit, editData] = useProfileEditMutation();
-    registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileEncode, FilePondPluginImagePreview);
+    const [isPictureLoading, setIsPictureLoading] = useState(false);
+    registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileEncode, FilePondPluginImagePreview, FilePondPluginFileValidateSize);
     const handleEditProfile = (e) => {
         e.preventDefault();
         let userId = data.id;
@@ -42,15 +44,19 @@ const EditProfile = () => {
                     allowMultiple={false}
                     allowFileTypeValidation={true}
                     acceptedFileTypes={['image/*']}
+                    allowFileSizeValidation={true}
+                    maxFileSize={'19MB'}
                     dropValidation={true}
                     checkValidity={true}
                     stylePanelLayout='integrated'
                     allowFileEncode={true}
                     allowImagePreview={true}
+                    onaddfile={() => setIsPictureLoading(false)}
+                    onaddfilestart={() => setIsPictureLoading(true)}
                     onupdatefiles={file => file.length != 0 ? setPicture({name: file[0].filename, base64: file[0].getFileEncodeBase64String()}) : setPicture(null) }
                 />
                 <textarea onChange={(e) => setDescription(e.target.value)} placeholder='description' defaultValue={data.description} />
-                <button type='submit'>Submit</button>
+                <button type='submit' disabled={isPictureLoading}>Submit</button>
             </form>
         </div>
     );
