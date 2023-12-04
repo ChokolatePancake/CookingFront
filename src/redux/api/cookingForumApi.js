@@ -135,12 +135,27 @@ export const cookingForumApi = createApi({
                 url: `/activity/${recipeId}/create`,
                 method: 'POST'
             }),
+        }),
+        refreshToken: builder.query({
+            query: () => ({
+                url: '/auth/refreshToken',
+                method: 'GET'
+            })
+        }),
+        getRecipes: builder.mutation({
+            query: (body) => ({
+                url: `/recipe/all`,
+                method: 'POST',
+                body: body
+            })
         })
     })
 });
 
 
 export const {
+    useRefreshTokenQuery,
+    useGetRecipesMutation,
     useRegisterUserMutation,
     useLoginUserMutation,
     useProfileQuery,

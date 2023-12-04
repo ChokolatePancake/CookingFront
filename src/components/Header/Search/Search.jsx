@@ -10,11 +10,10 @@ const Search = () => {
     const handleSearch = (e) => {
         setTitle(e.target.value);
     }
-    console.log(data);
     return (
         <div className={styles.searchWrapper}>
             <div className={styles.searchContainer}>
-                <input className={styles.search} onChange={handleSearch} type="text" placeholder="Search for recipes..."/>
+                <input className={styles.search + ' ' + 'recipe-search'} onChange={handleSearch} type="text" placeholder="Search for recipes..."/>
                 {
                     data != undefined ?
                         <div className={styles.result}>{isLoading ? <CircularProgress /> : data.map((recipe) => {

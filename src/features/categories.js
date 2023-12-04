@@ -1,0 +1,19 @@
+export const recipeCategories = [
+    'Soup',
+    'Salad',
+    'Sandwich',
+    'Meat',
+    'Fish',
+    'Pasta',
+    'Rice',
+    'Japanese',
+    'Italian',
+    'Mexican',
+    'Breakfast',
+    'Brunch',
+    'Lunch',
+    'Dinner',
+    'Supper',
+    'Snack',
+    'Vegeterian'
+];

@@ -1,16 +1,23 @@
 import React from 'react';
 import {useAddToFavoriteMutation, useIsFavoriteQuery, useRemoveFavoriteMutation} from "../../redux/api/cookingForumApi";
 import {CircularProgress} from "@mui/material";
+import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 const RecipeAddToFavorite = ({recipeId}) => {
+    const isAuth = useSelector(state => state.auth.isAuthenticated);
     const isFavoriteRecipe = useIsFavoriteQuery(recipeId);
     const [addToFavorite, addToFavoriteData] = useAddToFavoriteMutation();
     const [removeFavorite, removeFavoriteData] = useRemoveFavoriteMutation();
+    const navigate = useNavigate();
     if (isFavoriteRecipe.isLoading) {
         return <CircularProgress />
     }
     let fill = isFavoriteRecipe.data ? "#F6784C" : "transparent";
     const handleAddToFavorite = (e) => {
+        if (!isAuth) {
+            navigate('/login')
+        }
         if (isFavoriteRecipe.data) {
             removeFavorite(recipeId);
         }

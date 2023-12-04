@@ -1,27 +1,9 @@
 import React from 'react';
 import {Box, Chip, MenuItem, OutlinedInput, Select, useTheme} from "@mui/material";
+import {recipeCategories} from "../../../features/categories";
 
 const RecipeCategorySelect = ({onChange, defaultValue}) => {
     const theme = useTheme();
-    const categories = [
-        'Soup',
-        'Salad',
-        'Sandwich',
-        'Meat',
-        'Fish',
-        'Pasta',
-        'Rice',
-        'Japanese',
-        'Italian',
-        'Mexican',
-        'Breakfast',
-        'Brunch',
-        'Lunch',
-        'Dinner',
-        'Supper',
-        'Snack',
-        'Vegeterian'
-    ];
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -58,7 +40,7 @@ const RecipeCategorySelect = ({onChange, defaultValue}) => {
                 )}
                 MenuProps={MenuProps}
             >
-                {categories.map((category) => (
+                {recipeCategories.map((category) => (
                     <MenuItem
                         key={category}
                         value={category}

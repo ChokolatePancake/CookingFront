@@ -11,6 +11,9 @@
   & + div {
     display: none;
   }
+  &:focus {
+    transition: 1s;
+  }
   &:focus + div {
     display: flex;
   }

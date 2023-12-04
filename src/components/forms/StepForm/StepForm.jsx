@@ -64,8 +64,8 @@ const StepForm = ({number, recipeId}) => {
                 <textarea placeholder='Description' onChange={(e) => setText(e.target.value)} />
                 { number == countSteps ?
                 <div>
-                    <button type='submit'>Add next step</button>
-                    <button onClick={(e) => {addNewStep(e, true)}} type='button'>Submit recipe</button>
+                    <button type='submit' disabled={isPictureLoading}>Add next step</button>
+                    <button disabled={isPictureLoading} onClick={(e) => {addNewStep(e, true)}} type='button'>Submit recipe</button>
                 </div>
                     :
                     ''
