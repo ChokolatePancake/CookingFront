@@ -1,0 +1,24 @@
+.explore {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+.recipes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sort {
+  margin-left: 89%;
+  margin-bottom: 10px;
+}
+
+//.filters {
+//  width: 650px;
+//}
+
+.slider {
+  width: 200px;
+}

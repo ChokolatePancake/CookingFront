@@ -64,7 +64,8 @@ export const cookingForumApi = createApi({
             query: (id) => ({
                 url: `/recipe/${id}/publish`,
                 method: 'POST'
-            })
+            }),
+            invalidatesTags: ['profile']
         }),
         recipe: builder.query({
             query: (id) => ({
@@ -134,12 +135,34 @@ export const cookingForumApi = createApi({
                 url: `/activity/${recipeId}/create`,
                 method: 'POST'
             }),
+        }),
+        refreshToken: builder.query({
+            query: () => ({
+                url: '/auth/refreshToken',
+                method: 'GET'
+            })
+        }),
+        getRecipes: builder.mutation({
+            query: (body) => ({
+                url: `/recipe/all`,
+                method: 'POST',
+                body: body
+            })
+        }),
+        getRecentRecipes: builder.query({
+            query: () => ({
+                url: '/recipe/recent',
+                method: 'GET'
+            })
         })
     })
 });
 
 
 export const {
+    useGetRecentRecipesQuery,
+    useRefreshTokenQuery,
+    useGetRecipesMutation,
     useRegisterUserMutation,
     useLoginUserMutation,
     useProfileQuery,

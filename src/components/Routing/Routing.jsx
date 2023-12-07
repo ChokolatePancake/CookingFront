@@ -8,13 +8,16 @@ import PrivateRoute from "./PrivateRouting/PrivateRoute";
 import EditProfile from "../pages/Profile/EditProfile/EditProfile";
 import AddRecipeForm from "../pages/AddRecipeForm/AddRecipeForm";
 import Recipe from "../pages/Recipe/Recipe";
+import Recipes from "../pages/Recipes/Recipes";
+import ProfileFavorite from "../pages/Profile/ProfileFavorite/ProfileFavorite";
 
 const Routing = () => {
     return (
         <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/register" element={<RegisterForm/>} />
-            <Route path="/login" element={<LoginForm/>}/>
+            <Route path="/login" element={<LoginForm/>} />
+            <Route path="/explore" element={<Recipes />} />
             <Route path="/profile" element={
                 <PrivateRoute>
                     <Profile/>
@@ -30,6 +33,11 @@ const Routing = () => {
                     <AddRecipeForm/>
                 </PrivateRoute>
             }/>
+            <Route path="/profile/favorite" element={
+                <PrivateRoute>
+                    <ProfileFavorite />
+                </PrivateRoute>
+            }></Route>
             <Route path="/recipe/:id" element={<Recipe />} />
         </Routes>
     );

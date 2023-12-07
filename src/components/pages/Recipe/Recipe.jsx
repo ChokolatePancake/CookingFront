@@ -12,7 +12,8 @@ import RecipeCommentBox from "../../UI/RecipeCommentBox/RecipeCommentBox";
 import {useSelector} from "react-redux";
 import RecipeAddToFavorite from "../../RecipeAddToFavorite/RecipeAddToFavorite";
 import RecipeData from './RecipeData/RecipeData';
-import Avatar from '../../../assets/icons/avatar.png'
+import Avatar from '../../../assets/icons/avatar.png';
+import styles from './Recipe.module.scss';
 
 const Recipe = () => {
     let {id} = useParams();
@@ -33,7 +34,6 @@ const Recipe = () => {
             currentUserFullName: userData.data.nickName,
         };
     }
-    console.log(userData)
     const buildCommentData = (comment) => {
         let replies = [];
         if (comment.replies) {
@@ -60,18 +60,19 @@ const Recipe = () => {
         if (!parentCommentId) {
             parentCommentId = e.repliedToCommentId ? e.repliedToCommentId : null;
         }
+        console.log(parentCommentId);
+        console.log(e);
        const response = await addComment({
            id: id,
            body: {
                message: e.text,
-               commentId: parentCommentId
+               comment: parentCommentId
            },
        });
     }
     return (
-        <div>
-            <RecipeAddToFavorite recipeId={id} />
-            <RecipeData recioeId={id} data={data} userData={userData} />
+        <div className={styles.all}>
+            <RecipeData recipeId={id} data={data} userData={userData} />
             <div>
                 <RecipeCommentBox comments={commentsData} currentUser={currentUser} onSubmit={(e) => handleAddComment(e)} />
             </div>

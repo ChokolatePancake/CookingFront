@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addStep, resetSteps} from "../../../redux/features/addRecipeSlice";
 import { useNavigate } from 'react-router-dom';
 import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
+import styles from './StepForm.module.scss';
 
 const StepForm = ({number, recipeId}) => {
     const [picture, setPicture] = useState(null);
@@ -43,8 +44,9 @@ const StepForm = ({number, recipeId}) => {
     }
     return (
         <div>
-            <div>{number}</div>
-            <form onSubmit={addNewStep}>
+            <h3 className={styles.title}>Step {number}</h3>
+            <form className={styles.form} onSubmit={addNewStep}>
+                <div className={styles.picture}>
                 <FilePond
                     labelIdle='Drag & Drop your account picture or <span class="filepond--label-action"> Browse </span>'
                     allowMultiple={false}
@@ -56,16 +58,21 @@ const StepForm = ({number, recipeId}) => {
                     allowFileEncode={true}
                     allowImagePreview={true}
                     allowFileSizeValidation={true}
-                    maxFileSize={'19MB'}
+                    maxFileSize={'13MB'}
                     onaddfile={() => setIsPictureLoading(false)}
                     onaddfilestart={() => setIsPictureLoading(true)}
                     onupdatefiles={file => file.length != 0 ? setPicture(JSON.stringify({name: file[0].filename, base64: file[0].getFileEncodeBase64String()})) : setPicture(null) }
                 />
-                <textarea placeholder='Description' onChange={(e) => setText(e.target.value)} />
+                </div>
+                <textarea className={styles.description} placeholder='Description' required onChange={(e) => setText(e.target.value)} />
                 { number == countSteps ?
-                <div>
-                    <button type='submit'>Add next step</button>
-                    <button onClick={(e) => {addNewStep(e, true)}} type='button'>Submit recipe</button>
+                <div className={styles.buttons_container}>
+                    <button type='submit' disabled={isPictureLoading}>Add next step</button>
+                    {text ?
+                        <button disabled={isPictureLoading} onClick={(e) => {addNewStep(e, true)}} type='button'>Submit recipe</button>
+                        :
+                        <button disabled type='button'>Submit recipe</button>
+                    }
                 </div>
                     :
                     ''

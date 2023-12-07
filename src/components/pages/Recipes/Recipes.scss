@@ -1,0 +1,9 @@
+.MuiSlider-root {
+  color: $light-green !important;
+}
+
+.PrivateSwitchBase-input {
+  + svg {
+    color: $light-green;
+  }
+}

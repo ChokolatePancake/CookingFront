@@ -9,6 +9,7 @@ import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
+import styles from './RegisterForm.module.scss'
 
 const RegisterForm = () => {
     const [email, setEmail] = useState('');
@@ -45,14 +46,17 @@ const RegisterForm = () => {
         return <Navigate to='/profile' />
     }
     return (
-        <div>
+        <div className={styles.signup}>
             <h1>Register</h1>
             <div>{hasError ? 'User exist with this nickname or email.' : ''}</div>
-            <form onSubmit={handleRegister}>
-                <input required type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
-                <input required type="text" placeholder="Nick Name" onChange={(e) => setNickName(e.target.value)}/>
-                <input required type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
-                <FilePond
+            <form className={styles.form} onSubmit={handleRegister}>
+                <div className={styles.inputs}>
+                    <input className={styles.input} required type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
+                    <input className={styles.input} required type="text" placeholder="Nick Name" onChange={(e) => setNickName(e.target.value)}/>
+                    <input className={styles.input} required type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+                </div>
+               <div className={styles.item}>
+                <FilePond className={styles.picture}
                     labelIdle='Drag & Drop your account picture or <span class="filepond--label-action"> Browse </span>'
                     allowMultiple={false}
                     allowFileTypeValidation={true}
@@ -68,8 +72,9 @@ const RegisterForm = () => {
                     onaddfilestart={() => setIsPictureLoading(true)}
                     onupdatefiles={file => file.length != 0 ? setPicture({name: file[0].filename, base64: file[0].getFileEncodeBase64String()}) : setPicture(null) }
                 />
-                <button type="submit" disabled={isPictureLoading}>Sign Up</button>
-                <Link to={"/login"}>LogIn</Link>
+                <button className={styles.button} type="submit" disabled={isPictureLoading}>Sign Up</button>
+                <div className={styles.login}>Do you already have an account?<Link to={"/login"}>LogIn</Link></div>
+                </div>
             </form>
         </div>
     );

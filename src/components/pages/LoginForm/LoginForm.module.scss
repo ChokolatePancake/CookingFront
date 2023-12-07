@@ -28,23 +28,7 @@
 }
 
 .button {
-  background-color: $green;
   padding: 8px 22px;
   margin-top: 15px;
-  &:hover {
-    background-color: $dark-green;
-    transition: all .8s ease-in-out;
-  }
 }
 
-.signup {
-  margin-top: 15px;
-  a {
-    color: $black;
-    text-decoration: none;
-    &:hover {
-      color: $light-black;
-      transition: all .8s ease-in-out;
-    }
-  }
-}

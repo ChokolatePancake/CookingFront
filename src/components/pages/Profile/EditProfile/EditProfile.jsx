@@ -6,8 +6,9 @@ import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginFileEncode from "filepond-plugin-file-encode";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
-import {useDispatch} from "react-redux";
 import {Navigate} from "react-router-dom";
+import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
+import styles from './EditProfile.module.scss';
 
 const EditProfile = () => {
     const {data, isLoading, error} = useProfileQuery();
@@ -15,7 +16,8 @@ const EditProfile = () => {
     const [description, setDescription] = useState(null);
     const [dataUpdated, setDataUpdated] = useState(false);
     const [profileEdit, editData] = useProfileEditMutation();
-    registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileEncode, FilePondPluginImagePreview);
+    const [isPictureLoading, setIsPictureLoading] = useState(false);
+    registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileEncode, FilePondPluginImagePreview, FilePondPluginFileValidateSize);
     const handleEditProfile = (e) => {
         e.preventDefault();
         let userId = data.id;
@@ -34,23 +36,31 @@ const EditProfile = () => {
         return <CircularProgress />
     }
     return (
-        <div>
+        <div className={styles.all}>
             <h1>Edit profile</h1>
             <form onSubmit={handleEditProfile}>
-                <FilePond
+                <div className={styles.picture}>
+                    <FilePond
                     labelIdle='Drag & Drop your account picture or <span class="filepond--label-action"> Browse </span>'
                     allowMultiple={false}
                     allowFileTypeValidation={true}
                     acceptedFileTypes={['image/*']}
+                    allowFileSizeValidation={true}
+                    maxFileSize={'19MB'}
                     dropValidation={true}
                     checkValidity={true}
                     stylePanelLayout='integrated'
                     allowFileEncode={true}
                     allowImagePreview={true}
+                    onaddfile={() => setIsPictureLoading(false)}
+                    onaddfilestart={() => setIsPictureLoading(true)}
                     onupdatefiles={file => file.length != 0 ? setPicture({name: file[0].filename, base64: file[0].getFileEncodeBase64String()}) : setPicture(null) }
                 />
-                <textarea onChange={(e) => setDescription(e.target.value)} placeholder='description' defaultValue={data.description} />
-                <button type='submit'>Submit</button>
+                </div>
+                <div className={styles.form}>
+                <div><textarea className={styles.description} onChange={(e) => setDescription(e.target.value)} placeholder='description' defaultValue={data.description} /></div>
+                <div className={styles.button}><button type='submit' disabled={isPictureLoading}>Submit</button></div>
+                </div>
             </form>
         </div>
     );

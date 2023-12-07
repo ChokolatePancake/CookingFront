@@ -10,6 +10,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addStep} from "../../../redux/features/addRecipeSlice";
 import StepForm from "../../forms/StepForm/StepForm";
 import RecipeCategorySelect from "../../UI/RecipeCategorySelect/RecipeCategorySelect";
+import styles from "./AddRecipeForm.module.scss";
 
 const AddRecipeForm = () => {
     registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileEncode, FilePondPluginImagePreview, FilePondPluginFileValidateSize);
@@ -20,7 +21,6 @@ const AddRecipeForm = () => {
     const [isAddedRecipe, setIsAddedRecipe] = useState(false);
     const [recipeId, setRecipeId] = useState(null);
     const [categories, setCategories] = useState([]);
-    let [steps, setSteps] = useState(0);
     const [addRecipe, {isLoading}] = useRecipeAddMutation();
     const countSteps = useSelector(state => state.addRecipe.countSteps);
     const [isPictureLoading, setIsPictureLoading] = useState(false);
@@ -49,13 +49,13 @@ const AddRecipeForm = () => {
 
     return (
         <div>
-            <h1>Add Recipe</h1>
-            <form onSubmit={handleAddRecipe}>
-                <input required type="text" placeholder='Name' onChange={(e) => setName(e.target.value)} />
-                <textarea required placeholder='Ingredients' onChange={(e) => setIngredients(e.target.value)} />
-                <input required type="number" placeholder='Cooking time' onChange={(e) => setCookingTime(e.target.value)}/>
-                <RecipeCategorySelect defaultValue={categories} onChange={(e) =>  setCategories(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)} />
-                <FilePond
+            <h1 className={styles.title}>Add Recipe</h1>
+            <form className={styles.form} onSubmit={handleAddRecipe}>
+                <input className={styles.inputs} required type="text" placeholder='Name' onChange={(e) => setName(e.target.value)} />
+                <textarea className={styles.ingredients + ' ' + styles.inputs} required placeholder='Ingredients' onChange={(e) => setIngredients(e.target.value)} />
+                <input className={styles.inputs} required type="number" min="0" max="1440"  placeholder='Cooking time' onChange={(e) => setCookingTime(e.target.value)}/>
+                <div className={styles.categories}><RecipeCategorySelect defaultValue={categories} onChange={(e) =>  setCategories(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)} /></div>
+                <div><FilePond className={styles.picture}
                     labelIdle='Drag & Drop your account picture or <span class="filepond--label-action"> Browse </span>'
                     allowMultiple={false}
                     allowFileTypeValidation={true}
@@ -71,11 +71,14 @@ const AddRecipeForm = () => {
                     onaddfilestart={() => setIsPictureLoading(true)}
                     onupdatefiles={file => file.length != 0 ? setPicture(JSON.stringify({name: file[0].filename, base64: file[0].getFileEncodeBase64String()})) : setPicture(null) }
                 />
+                </div>
+                <div className={styles.button}>
                 {
                     countSteps == 0
                         ? <button type='submit' disabled={isPictureLoading}>Add step</button>
                         : ''
                 }
+                </div>
             </form>
             {stepForms}
         </div>

@@ -6,19 +6,20 @@ import {Link} from "react-router-dom";
 
 const Search = () => {
     const [title, setTitle] = useState('');
+    const [visible, setVisible] = useState(false);
     const {data, isLoading, error} = useSearchRecipeQuery(title);
     const handleSearch = (e) => {
         setTitle(e.target.value);
     }
-    console.log(data);
+    console.log(visible);
     return (
-        <div className={styles.searchWrapper}>
+        <div className={styles.searchWrapper + ' ' + 'recipe-search'}>
             <div className={styles.searchContainer}>
-                <input className={styles.search} onChange={handleSearch} type="text" placeholder="Search for recipes..."/>
+                <input onBlur={async () => {setTimeout(() => setVisible(false), 200)}} onFocus={() => setVisible(true)} className={styles.search} onChange={handleSearch} type="text" placeholder="Search for recipes..."/>
                 {
                     data != undefined ?
-                        <div className={styles.result}>{isLoading ? <CircularProgress /> : data.map((recipe) => {
-                            return <Link className={styles.recipe} to={`recipe/${recipe.id}`}>{recipe.name}</Link>
+                        <div style={{display: visible ? 'flex' : 'none'}} className={styles.result}>{isLoading ? <CircularProgress /> : data.map((recipe) => {
+                            return <Link className={styles.recipe} to={`recipe/${recipe.id}`}><div className={styles.name}>{recipe.name}</div> <img className={styles.picture} src={'http://localhost:8080/' + recipe.picture}/></Link>
                         })}</div>   : ''
                 }
             </div>

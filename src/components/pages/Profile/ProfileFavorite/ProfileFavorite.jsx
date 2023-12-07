@@ -2,23 +2,24 @@ import React from 'react';
 import {useGetFavoritesQuery} from "../../../../redux/api/cookingForumApi";
 import {CircularProgress} from "@mui/material";
 import {Link} from "react-router-dom";
+import styles from './ProfileFavorite.module.scss';
+import RecipeBlock from "../../../RecipeBlock/RecipeBlock";
 
 const ProfileFavorite = () => {
     const {data, isLoading, error} = useGetFavoritesQuery();
     if (isLoading) {
         return <CircularProgress />
     }
-    console.log(data)
     return (
         <div>
-            <h2>My favorite</h2>
+            <h2 className={styles.title}>My favorites</h2>
+            <div className={styles.recipes}>
             {
                 data.map((recipe) =>
-                    <div>
-                        <Link to={`/recipe/${recipe.id}`}>{recipe.name}</Link>
-                    </div>
+                        <RecipeBlock recipe={recipe} />
                 )
             }
+            </div>
         </div>
     );
 };
