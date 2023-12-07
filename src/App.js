@@ -2,6 +2,7 @@ import './App.scss';
 import Routing from "./components/Routing/Routing";
 import Container from "./components/Container/Container";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <Container>
             <Header />
             <Routing/>
+            <Footer />
         </Container>
     </div>
   );

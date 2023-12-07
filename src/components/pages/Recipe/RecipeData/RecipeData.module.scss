@@ -1,0 +1,64 @@
+.picture {
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 16px;
+  width: 500px;
+  height: 350px;
+  display: block;
+  margin-right: 40px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.favorite {
+  div {
+    svg {
+      width: 50px;
+      height: 50px;
+    }
+  }
+}
+
+.info {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  div {
+    display: flex;
+    div {
+      color: $black;
+      font-weight: 500;
+      margin-right: 5px;
+    }
+    &:not(:first-child) {
+      margin-top: 15px;
+    }
+  }
+}
+
+.step {
+  text-transform: uppercase;
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.step_description {
+  margin-top: 25px;
+  margin-left: 50px;
+}
+
+.recipe_data {
+  justify-content: center;
+  display: flex;
+}
+
+.step_info {
+  display: flex;
+}

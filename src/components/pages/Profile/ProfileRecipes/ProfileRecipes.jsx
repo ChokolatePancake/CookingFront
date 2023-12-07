@@ -3,23 +3,24 @@ import {useProfileRecipesQuery} from "../../../../redux/api/cookingForumApi";
 import {CircularProgress} from "@mui/material";
 import {Link} from "react-router-dom";
 import styles from './ProfileRecipes.module.scss';
+import RecipeBlock from "../../../RecipeBlock/RecipeBlock";
 
 const ProfileRecipes = () => {
     const {data, isLoading, error} = useProfileRecipesQuery();
     if (isLoading) {
         return <CircularProgress />
     }
-    console.log(data);
     return (
         <div>
-            <h2>My recipes</h2>
+            <h2 className={styles.title}>My recipes</h2>
+            <div className={styles.recipes}>
             {
                 data.map((recipe) =>
-                    <div className={styles.recipes}>
-                        <Link to={`/recipe/${recipe.id}`}>{recipe.name}</Link>
-                    </div>
+
+                        <RecipeBlock recipe={recipe} />
                 )
             }
+            </div>
         </div>
     );
 };

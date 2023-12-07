@@ -148,12 +148,19 @@ export const cookingForumApi = createApi({
                 method: 'POST',
                 body: body
             })
+        }),
+        getRecentRecipes: builder.query({
+            query: () => ({
+                url: '/recipe/recent',
+                method: 'GET'
+            })
         })
     })
 });
 
 
 export const {
+    useGetRecentRecipesQuery,
     useRefreshTokenQuery,
     useGetRecipesMutation,
     useRegisterUserMutation,

@@ -1,0 +1,16 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 0;
+}
+.logo {
+  width: 80px;
+}
+.text {
+  font-size: 16px;
+  font-weight: 500;
+  max-width: 500px;
+  text-align: center;
+}

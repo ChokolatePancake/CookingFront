@@ -1,0 +1,30 @@
+.all {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form {
+  div {
+    margin-top: 20px;
+  }
+}
+
+.picture {
+  column-width: 346px;
+  margin: 0;
+  padding: 0;
+  background-color: $dark-white;
+  border-radius: 15px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+}
+
+.description {
+  height: 200px;
+  width: 400px;
+}

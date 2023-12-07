@@ -9,6 +9,7 @@ import EditProfile from "../pages/Profile/EditProfile/EditProfile";
 import AddRecipeForm from "../pages/AddRecipeForm/AddRecipeForm";
 import Recipe from "../pages/Recipe/Recipe";
 import Recipes from "../pages/Recipes/Recipes";
+import ProfileFavorite from "../pages/Profile/ProfileFavorite/ProfileFavorite";
 
 const Routing = () => {
     return (
@@ -32,6 +33,11 @@ const Routing = () => {
                     <AddRecipeForm/>
                 </PrivateRoute>
             }/>
+            <Route path="/profile/favorite" element={
+                <PrivateRoute>
+                    <ProfileFavorite />
+                </PrivateRoute>
+            }></Route>
             <Route path="/recipe/:id" element={<Recipe />} />
         </Routes>
     );

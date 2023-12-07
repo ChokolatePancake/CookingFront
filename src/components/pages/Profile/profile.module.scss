@@ -1,17 +1,22 @@
 .allitems {
   font-size: 20px;
   display: flex;
-  &:not(:first-child) {
-    margin-top: 10px;
-  }
+  margin-top: 15px;
 }
 
 .items {
   display: flex;
   flex-direction: column;
+  margin-left: 30px;
 }
 
 .profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.picturebuttons {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,31 +33,28 @@
 }
 
 .image {
-  width: 300px;
-  border-radius: 8%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 16px;
+  width: 289px;
+  height: 200px;
+  display: block;
 }
 
 .buttoncontainer {
   display: flex;
   flex-direction: row;
-  margin-top: 30px;
-}
-
-.button {
-  a {
-    text-decoration: none;
-    color: $white;
-    text-transform: uppercase;
-    font-size: 20px;
-    padding: 8px 12px;
-    background-color: $light-green;
-    border-radius: 15px;
-    &:hover {
-      background-color: $green;
-      transition: all .8s ease-in-out;
+  margin-top: 15px;
+  div {
+    padding: 5px 20px 0px;
+    margin: 0;
+    &:not(:first-child) {
+      margin-left: 10px;
     }
-  }
-  &:not(:first-child) {
-    margin-left: 15px;
+    &:hover {
+      transition: all ease-in-out .7s;
+      border-radius: 10px;
+      background-color: $dark-white;
+    }
   }
 }
