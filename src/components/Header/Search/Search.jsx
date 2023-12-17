@@ -11,7 +11,6 @@ const Search = () => {
     const handleSearch = (e) => {
         setTitle(e.target.value);
     }
-    console.log(visible);
     return (
         <div className={styles.searchWrapper + ' ' + 'recipe-search'}>
             <div className={styles.searchContainer}>
@@ -19,7 +18,14 @@ const Search = () => {
                 {
                     data != undefined ?
                         <div style={{display: visible ? 'flex' : 'none'}} className={styles.result}>{isLoading ? <CircularProgress /> : data.map((recipe) => {
-                            return <Link className={styles.recipe} to={`recipe/${recipe.id}`}><div className={styles.name}>{recipe.name}</div> <img className={styles.picture} src={'http://localhost:8080/' + recipe.picture}/></Link>
+                            let recipeImage = '';
+                            if (recipe.picture) {
+                                recipeImage = <img className={styles.picture} src={'http://localhost:8080/' + recipe.picture}/>;
+                            }
+                            return <Link className={styles.recipe} to={`recipe/${recipe.id}`}>
+                                <div className={styles.name}>{recipe.name}</div>
+                                {recipeImage}
+                            </Link>
                         })}</div>   : ''
                 }
             </div>

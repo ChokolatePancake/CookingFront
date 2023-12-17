@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {useParams} from "react-router-dom";
 import {
-    useAddActivityMutation,
-    useAddCommentMutation, useExistActivityQuery,
+    useAddCommentMutation,
     useGetCommentsQuery,
     useProfileQuery,
     useRecipeQuery,
@@ -10,7 +9,6 @@ import {
 import {CircularProgress} from "@mui/material";
 import RecipeCommentBox from "../../UI/RecipeCommentBox/RecipeCommentBox";
 import {useSelector} from "react-redux";
-import RecipeAddToFavorite from "../../RecipeAddToFavorite/RecipeAddToFavorite";
 import RecipeData from './RecipeData/RecipeData';
 import Avatar from '../../../assets/icons/avatar.png';
 import styles from './Recipe.module.scss';
@@ -60,8 +58,6 @@ const Recipe = () => {
         if (!parentCommentId) {
             parentCommentId = e.repliedToCommentId ? e.repliedToCommentId : null;
         }
-        console.log(parentCommentId);
-        console.log(e);
        const response = await addComment({
            id: id,
            body: {

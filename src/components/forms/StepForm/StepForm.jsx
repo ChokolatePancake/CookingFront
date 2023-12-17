@@ -16,6 +16,7 @@ const StepForm = ({number, recipeId}) => {
     const [text, setText] = useState('');
     const [addRecipeStep, {isLoading}] = useStepAddMutation();
     const [publishRecipe, publishRecipeData] = usePublishRecipeMutation();
+    const [fileLoadDisabled, setFileLoadDisabled] = useState(false);
     const countSteps = useSelector(state => state.addRecipe.countSteps);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -23,6 +24,7 @@ const StepForm = ({number, recipeId}) => {
     registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileEncode, FilePondPluginImagePreview, FilePondPluginFileValidateSize);
     const addNewStep = (e, finish = false) => {
         e.preventDefault();
+        setFileLoadDisabled(true);
         const response = addRecipeStep({
             id: recipeId,
             body: {
@@ -48,7 +50,8 @@ const StepForm = ({number, recipeId}) => {
             <form className={styles.form} onSubmit={addNewStep}>
                 <div className={styles.picture}>
                 <FilePond
-                    labelIdle='Drag & Drop your account picture or <span class="filepond--label-action"> Browse </span>'
+                    disabled={fileLoadDisabled}
+                    labelIdle='Drag & Drop your step picture or <span class="filepond--label-action"> Browse </span>'
                     allowMultiple={false}
                     allowFileTypeValidation={true}
                     acceptedFileTypes={['image/*']}

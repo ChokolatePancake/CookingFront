@@ -4,6 +4,14 @@ import styles from './RecipeBlock.module.scss';
 import defaultImagw from '../../assets/recipe_default.jpg'
 import {Link} from "react-router-dom";
 
+const trimmedString = (string, maxLength) => {
+    if (string.length > maxLength) {
+        return string.substring(0, maxLength) + '...';
+    } else {
+        return string;
+    }
+}
+
 const RecipeBlock = ({recipe}) => {
     return (
 
@@ -15,7 +23,7 @@ const RecipeBlock = ({recipe}) => {
                 <div className={styles.info}>
                     <div className={styles.category}>{recipe.category.slice(0, 3).join(', ')}</div>
                     <Link style={{textDecoration: 'none'}} to={`/recipe/${recipe.id}`}>
-                        <h3 className={styles.title}>{recipe.name}</h3>
+                        <h3 className={styles.title}>{trimmedString(recipe.name, 35)}</h3>
                     </Link>
                     <div className={styles.favorite_time}>
                         <div className={styles.time}>{recipe.time + ' min'}</div>

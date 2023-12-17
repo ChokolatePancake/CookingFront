@@ -3,6 +3,7 @@ import { useAddActivityMutation } from '../../../../redux/api/cookingForumApi';
 import { useSelector } from 'react-redux';
 import styles from './RecipeData.module.scss';
 import RecipeAddToFavorite from "../../../RecipeAddToFavorite/RecipeAddToFavorite";
+import moment from 'moment';
 
 const RecipeData = ({data, userData, recipeId}) => {
   const [addActivity, addActivityData] = useAddActivityMutation();
@@ -25,10 +26,10 @@ const RecipeData = ({data, userData, recipeId}) => {
       <div className={styles.info}>
           <div><div>Time: </div>
               {data.time} mins</div>
-          <div><div>Ingredients: </div>
+          <div className={styles.ingredients}><div>Ingredients: </div>
               {data.ingredients}</div>
           <div><div>Date: </div>
-              {data.date}</div>
+              {moment(data.date).format('MMMM Do YYYY, h:mm:ss a')}</div>
           <div><div>Category: </div>
               {data.category.join(', ')}</div>
           <div><div>Author: </div>
