@@ -11,7 +11,7 @@ const RecommendationRecipes = () => {
   if (isLoading) {
     return <CircularProgress />
   }
-  if (error || !data) {
+  if (error || !data || data.length == 0) {
     return <div></div>;
   }
   return (
