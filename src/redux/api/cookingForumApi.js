@@ -14,7 +14,7 @@ export const cookingForumApi = createApi({
             return headers;
         }
     }),
-    tagTypes: ['profile', 'comment', 'favorite'],
+    tagTypes: ['profile', 'comment', 'favorite', 'recipe'],
     endpoints: (builder) => ({
         registerUser: builder.mutation({
             query: (body) => ({
@@ -51,14 +51,16 @@ export const cookingForumApi = createApi({
                 url: '/recipe/create',
                 method: 'POST',
                 body: body
-            })
+            }),
+            invalidatesTags: ['recipe']
         }),
         stepAdd: builder.mutation({
             query: ({id, body}) => ({
                 url: `/recipe/${id}/step/create`,
                 method: 'POST',
                 body: body
-            })
+            }),
+            invalidatesTags: ['recipe']
         }),
         publishRecipe: builder.mutation({
             query: (id) => ({
@@ -71,15 +73,15 @@ export const cookingForumApi = createApi({
             query: (id) => ({
                 url: `/recipe/${id}`,
                 method: 'GET'
-            })
+            }),
+            providesTags: ['recipe']
         }),
         profileRecipes: builder.query({
             query: () => ({
                 url: '/profile/recipes',
                 method: 'GET'
             }),
-            providesTags: ['profile']
-
+            providesTags: ['profile', 'recipe']
         }),
         addComment: builder.mutation({
             query: ({id, body}) => ({
@@ -129,6 +131,7 @@ export const cookingForumApi = createApi({
                 url: `/recipe/search/${title}`,
                 method: 'GET'
             }),
+            providesTags: ['recipe']
         }),
         addActivity: builder.mutation({
             query: (recipeId) => ({
@@ -136,22 +139,31 @@ export const cookingForumApi = createApi({
                 method: 'POST'
             }),
         }),
-        refreshToken: builder.query({
-            query: () => ({
-                url: '/auth/refreshToken',
-                method: 'GET'
-            })
-        }),
         getRecipes: builder.mutation({
             query: (body) => ({
                 url: `/recipe/all`,
                 method: 'POST',
                 body: body
-            })
+            }),
+            providesTags: ['recipe']
         }),
         getRecentRecipes: builder.query({
             query: () => ({
                 url: '/recipe/recent',
+                method: 'GET'
+            }),
+            providesTags: ['recipe']
+        }),
+        removeRecipe: builder.mutation({
+            query: (recipeId) => ({
+                url: `/recipe/${recipeId}/delete`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['recipe']
+        }),
+        isRecipesAuthor: builder.query({
+            query: (recipeId) =>({
+                url: `/recipe/${recipeId}/isAuthor`,
                 method: 'GET'
             })
         })
@@ -160,8 +172,9 @@ export const cookingForumApi = createApi({
 
 
 export const {
+    useIsRecipesAuthorQuery,
+    useRemoveRecipeMutation,
     useGetRecentRecipesQuery,
-    useRefreshTokenQuery,
     useGetRecipesMutation,
     useRegisterUserMutation,
     useLoginUserMutation,

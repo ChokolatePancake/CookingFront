@@ -3,8 +3,15 @@ import RecipeAddToFavorite from "../RecipeAddToFavorite/RecipeAddToFavorite";
 import styles from './RecipeBlock.module.scss';
 import defaultImagw from '../../assets/recipe_default.jpg'
 import {Link} from "react-router-dom";
+import {useIsRecipesAuthorQuery} from "../../redux/api/cookingForumApi";
+import DeleteRecipe from "../DeleteRecipe/DeleteRecipe";
+import {CircularProgress} from "@mui/material";
 
 const RecipeBlock = ({recipe}) => {
+    const isAuthor = useIsRecipesAuthorQuery(recipe.id);
+    if (isAuthor.isLoading) {
+        return <CircularProgress />
+    }
     return (
 
             <div className={styles.recipe}>
@@ -19,6 +26,7 @@ const RecipeBlock = ({recipe}) => {
                     </Link>
                     <div className={styles.favorite_time}>
                         <div className={styles.time}>{recipe.time + ' min'}</div>
+                        {isAuthor.data ? <DeleteRecipe recipeId={recipe.id} /> : ''}
                         <RecipeAddToFavorite recipeId={recipe.id} />
                     </div>
                 </div>
