@@ -15,6 +15,7 @@ import styles from "./AddRecipeForm.module.scss";
 const AddRecipeForm = () => {
     registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileEncode, FilePondPluginImagePreview, FilePondPluginFileValidateSize);
     const [picture, setPicture] = useState(null);
+    const [fileLoadDisabled, setFileLoadDisabled] = useState(false);
     const [name, setName] = useState('');
     const [ingredients, setIngredients] = useState('');
     const [cookingTime, setCookingTime] = useState(0);
@@ -32,6 +33,7 @@ const AddRecipeForm = () => {
     const handleAddRecipe = (e) => {
         e.preventDefault();
         if (!isAddedRecipe) {
+            setFileLoadDisabled(true);
             const response = addRecipe({
                 picture,
                 name,
@@ -56,9 +58,10 @@ const AddRecipeForm = () => {
                 <input className={styles.inputs} required type="number" min="0" max="1440"  placeholder='Cooking time' onChange={(e) => setCookingTime(e.target.value)}/>
                 <div className={styles.categories}><RecipeCategorySelect defaultValue={categories} onChange={(e) =>  setCategories(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)} /></div>
                 <div><FilePond className={styles.picture}
-                    labelIdle='Drag & Drop your account picture or <span class="filepond--label-action"> Browse </span>'
+                    labelIdle='Drag & Drop your recipe picture or <span class="filepond--label-action"> Browse </span>'
                     allowMultiple={false}
                     allowFileTypeValidation={true}
+                    disabled={fileLoadDisabled}
                     acceptedFileTypes={['image/*']}
                     dropValidation={true}
                     checkValidity={true}

@@ -166,7 +166,13 @@ export const cookingForumApi = createApi({
                 url: `/recipe/${recipeId}/isAuthor`,
                 method: 'GET'
             })
-        })
+        }),
+        getRecommendedRecipes: builder.query({
+            query: () => ({
+                url: '/recipe/recommended',
+                method: 'GET'
+            })
+        }),
     })
 });
 
@@ -175,6 +181,7 @@ export const {
     useIsRecipesAuthorQuery,
     useRemoveRecipeMutation,
     useGetRecentRecipesQuery,
+    useGetRecommendedRecipesQuery,
     useGetRecipesMutation,
     useRegisterUserMutation,
     useLoginUserMutation,
