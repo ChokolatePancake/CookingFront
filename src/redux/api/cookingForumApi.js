@@ -98,20 +98,27 @@ export const cookingForumApi = createApi({
             }),
             providesTags: ['comment']
         }),
-        addToFavorite: builder.mutation({
+        changeFavorite: builder.mutation({
             query: (id) => ({
-                url: `/recipe/${id}/favorite/add`,
+                url: `/recipe/${id}/favorite/`,
                 method: 'POST'
             }),
             invalidatesTags: ['favorite']
         }),
-        removeFavorite: builder.mutation({
-            query: (id) => ({
-                url: `/recipe/${id}/favorite/remove`,
-                method: 'POST'
-            }),
-            invalidatesTags: ['favorite']
-        }),
+        // addToFavorite: builder.mutation({
+        //     query: (id) => ({
+        //         url: `/recipe/${id}/favorite/add`,
+        //         method: 'POST'
+        //     }),
+        //     invalidatesTags: ['favorite']
+        // }),
+        // removeFavorite: builder.mutation({
+        //     query: (id) => ({
+        //         url: `/recipe/${id}/favorite/remove`,
+        //         method: 'POST'
+        //     }),
+        //     invalidatesTags: ['favorite']
+        // }),
         getFavorites: builder.query({
             query: () => ({
                 url: '/recipe/favorites',
@@ -194,8 +201,9 @@ export const {
     useProfileRecipesQuery,
     useAddCommentMutation,
     useGetCommentsQuery,
-    useAddToFavoriteMutation,
-    useRemoveFavoriteMutation,
+    useChangeFavoriteMutation,
+    // useAddToFavoriteMutation,
+    // useRemoveFavoriteMutation,
     useGetFavoritesQuery,
     useIsFavoriteQuery,
     useSearchRecipeQuery,

@@ -1,5 +1,6 @@
 import React from 'react';
-import {useAddToFavoriteMutation, useIsFavoriteQuery, useRemoveFavoriteMutation} from "../../redux/api/cookingForumApi";
+// import {useAddToFavoriteMutation, useIsFavoriteQuery, useRemoveFavoriteMutation} from "../../redux/api/cookingForumApi";
+import { useIsFavoriteQuery, useChangeFavoriteMutation} from "../../redux/api/cookingForumApi";
 import {CircularProgress} from "@mui/material";
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
@@ -7,8 +8,9 @@ import {useNavigate} from "react-router-dom";
 const RecipeAddToFavorite = ({recipeId}) => {
     const isAuth = useSelector(state => state.auth.isAuthenticated);
     const isFavoriteRecipe = useIsFavoriteQuery(recipeId);
-    const [addToFavorite, addToFavoriteData] = useAddToFavoriteMutation();
-    const [removeFavorite, removeFavoriteData] = useRemoveFavoriteMutation();
+    const [changeFavorite, changeFavoriteData] = useChangeFavoriteMutation();
+    // const [addToFavorite, changeFavoriteData] = useAddToFavoriteMutation();
+    // const [removeFavorite, removeFavoriteData] = useRemoveFavoriteMutation();
     const navigate = useNavigate();
     if (isFavoriteRecipe.isLoading) {
         return <CircularProgress />
@@ -18,12 +20,13 @@ const RecipeAddToFavorite = ({recipeId}) => {
         if (!isAuth) {
             navigate('/login')
         }
-        if (isFavoriteRecipe.data) {
-            removeFavorite(recipeId);
-        }
-        else {
-            addToFavorite(recipeId);
-        }
+        // if (isFavoriteRecipe.data) {
+        //     removeFavorite(recipeId);
+        // }
+        // else {
+        //     addToFavorite(recipeId);
+        // }
+        changeFavorite(recipeId);
     }
     return (
         <div onClick={handleAddToFavorite}>

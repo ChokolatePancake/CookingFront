@@ -18,10 +18,11 @@ const RecipesData = ({categories, timeAfter, timeBefore, date}) => {
         timeAfter
     };
     useEffect(() => {
+        console.log(categories);
         if (previousPage == page) {
             setPage(0);
         }
-        getRecipes(recipesBody).unwrap().then((data) => setRecipes(data));
+        getRecipes(recipesBody).unwrap().then((data) => setRecipes(data)).catch((e) => console.log(e));
     }, [page, categories, timeBefore, timeAfter, date]);
     if (isLoading || !recipes) {
         return <CircularProgress />

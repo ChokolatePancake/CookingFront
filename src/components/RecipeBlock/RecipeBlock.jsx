@@ -34,8 +34,10 @@ const RecipeBlock = ({recipe}) => {
                     </Link>
                     <div className={styles.favorite_time}>
                         <div className={styles.time}>{recipe.time + ' min'}</div>
-                        {isAuthor.data ? <DeleteRecipe recipeId={recipe.id} /> : ''}
-                        <RecipeAddToFavorite recipeId={recipe.id} />
+                        <div className={styles.actions}>
+                            {isAuthor.data ? <DeleteRecipe recipeId={recipe.id} /> : ''}
+                            <RecipeAddToFavorite recipeId={recipe.id} />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -15,5 +15,10 @@ export const recipeCategories = [
     'Dinner',
     'Supper',
     'Snack',
-    'Vegeterian'
+    'Vegeterian',
+    'Desert',
+    'Meat free',
+    'Fruits',
+    'Lactose free',
+    'Ukrainian'
 ];
