@@ -33,8 +33,8 @@ const RegisterForm = () => {
         }
         const response = registerUser(formData);
         if (!isLoading) {
-            console.log(error)
             if (error) {
+                console.log(error)
                 setHasError(true);
             }
             else {

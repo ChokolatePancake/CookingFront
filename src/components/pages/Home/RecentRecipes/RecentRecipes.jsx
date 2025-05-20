@@ -13,9 +13,16 @@ const RecentRecipes = () => {
     return (
         <div>
             <div className={styles.recipes}>
-                {data.map((recipe) => (
-                    <RecipeBlock recipe={recipe} key={recipe.id}/>
-                ))}
+                {data ? (
+                    data.map((recipe) => (
+                        <RecipeBlock recipe={recipe} key={recipe.id}/>
+                    ))
+                ) : (
+                    <div className={styles.error}>
+                        <h2>No recipes found</h2>
+                        <p>{error && error.message}</p>
+                    </div>
+                )}
             </div>
             <div className={styles.more_wrapper}>
                 <Link className={styles.more} to={'/explore'}>View more</Link>

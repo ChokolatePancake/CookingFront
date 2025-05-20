@@ -50,9 +50,15 @@ const Recipe = () => {
         }
     }
     let commentsData = [];
-    comments.data.map(comment => {
-        commentsData.push(buildCommentData(comment));
-    });
+    if (comments == undefined || comments.error) {
+        console.log(comments.error);
+        commentsData = [];
+    }
+    else {
+        comments.data.map(comment => {
+            commentsData.push(buildCommentData(comment));
+        });
+    }
     const handleAddComment = async (e) => {
         let parentCommentId = e.parentOfRepliedCommentId ? e.parentOfRepliedCommentId : null;
         if (!parentCommentId) {
