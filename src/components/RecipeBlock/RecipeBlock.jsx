@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import {useIsRecipesAuthorQuery} from "../../redux/api/cookingForumApi";
 import DeleteRecipe from "../DeleteRecipe/DeleteRecipe";
 import {CircularProgress} from "@mui/material";
+import getEnvVar from "../../redux/features/getEnvVars";
 
 const trimmedString = (string, maxLength) => {
     if (string.length > maxLength) {
@@ -24,7 +25,7 @@ const RecipeBlock = ({recipe}) => {
 
             <div className={styles.recipe}>
                 <Link style={{textDecoration: 'none'}} to={`/recipe/${recipe.id}`}>
-                {recipe.picture ? <img className={styles.picture} src={'http://localhost:8080/' + recipe.picture} alt="recipe"/> :
+                {recipe.picture ? <img className={styles.picture} src={`${getEnvVar('BACKEND_URL')}/` + recipe.picture} alt="recipe"/> :
                     <img className={styles.picture} src={defaultImagw} alt="recipe"/>}
                 </Link>
                 <div className={styles.info}>

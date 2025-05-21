@@ -1,3 +1,6 @@
+@import "../../../../scss/media";
+@import "../../../../scss/variables";
+
 .picture {
   object-fit: cover;
   object-position: top center;
@@ -6,6 +9,16 @@
   height: 350px;
   display: block;
   margin-right: 40px;
+  flex-shrink: 0; // Does not allow the image to shrink
+
+  @include breakpoint('tablet') {
+    width: 100%;
+    height: 400px;
+    margin-right: 0;
+    object-fit: cover;
+    object-position: center;
+    border: rgba($light-black, 0.3) 1px solid;
+  }
 }
 
 .title {
@@ -28,6 +41,8 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  flex: 1 1 0; // fills the available space
+  min-width: 0; // Allows the flex item to shrink below its content size
   div {
     display: flex;
     div {
@@ -44,25 +59,71 @@
 .step {
   text-transform: uppercase;
   text-align: center;
-  margin-top: 60px;
   margin-bottom: 30px;
   font-weight: bold;
+
+  @include breakpoint('tablet') {
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  @include breakpoint('tablet') {
+    margin-top: 0;
+    padding: 0 5px;
+    gap: 10px;
+  }
+}
+
+.step_container {
+  background-color: rgba($dark-white, 0.1);
+  border: rgba($light-black, 0.3) 1px solid;
+  padding: 10px 5px;
+  border-radius: 20px;
 }
 
 .step_description {
   margin-top: 25px;
   margin-left: 50px;
+  word-wrap: anywhere;
+  hyphens: auto;
+  margin-bottom: 15px;
+
+  @include breakpoint('tablet') {
+    margin: 10px 0;
+    padding: 0 5px;
+  }
 }
 
 .recipe_data {
   justify-content: center;
   display: flex;
+  align-items: flex-start;
+  @include breakpoint('tablet') {
+    flex-direction: column;
+  }
 }
 
 .step_info {
   display: flex;
+
+  @include breakpoint('tablet') {
+    flex-direction: column;
+  }
 }
 
-.ingredients {
-  white-space: pre;
+.ingredients ul {
+  margin: 0;
+}
+
+.ingredient {
+  word-wrap: anywhere;
+  hyphens: auto;
 }

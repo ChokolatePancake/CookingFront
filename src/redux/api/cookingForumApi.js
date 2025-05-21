@@ -1,11 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import getEnvVar from '../features/getEnvVars.js';
 
 const getToken = state => state.auth.token;
 
 export const cookingForumApi = createApi({
     reducerPath: "cookingForumApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:8080/api",
+        baseUrl: `${getEnvVar('BACKEND_URL')}/api`,
         prepareHeaders: (headers, { getState }) => {
             const token = getToken(getState());
             if (token) {

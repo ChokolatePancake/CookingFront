@@ -12,6 +12,7 @@ import {useSelector} from "react-redux";
 import RecipeData from './RecipeData/RecipeData';
 import Avatar from '../../../assets/icons/avatar.png';
 import styles from './Recipe.module.scss';
+import getEnvVar from '../../../redux/features/getEnvVars';
 
 const Recipe = () => {
     let {id} = useParams();
@@ -27,7 +28,7 @@ const Recipe = () => {
     if (!userData.error && isAuth) {
         currentUser = {
             currentUserId: userData.data.id,
-            currentUserImg: userData.data.picture ? 'http://localhost:8080/' + userData.data.picture : null,
+            currentUserImg: userData.data.picture ? `${getEnvVar('BACKEND_URL')}/` + userData.data.picture : null,
             currentUserProfile: null,
             currentUserFullName: userData.data.nickName,
         };
@@ -43,7 +44,7 @@ const Recipe = () => {
             userId: comment.authorId,
             comId: comment.id,
             fullName: comment.authorNickname,
-            avatarUrl: comment.picture ? 'http://localhost:8080/'+ comment.picture : Avatar,
+            avatarUrl: comment.picture ? `${getEnvVar('BACKEND_URL')}/`+ comment.picture : Avatar,
             userProfile: null,
             text: comment.message,
             replies: replies
@@ -68,10 +69,11 @@ const Recipe = () => {
            id: id,
            body: {
                message: e.text,
-               comment: parentCommentId
+               comment: parentCommentId,
            },
        });
     }
+
     return (
         <div className={styles.all}>
             <RecipeData recipeId={id} data={data} userData={userData} />

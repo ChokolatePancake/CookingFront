@@ -8,6 +8,7 @@ import {loginSuccess, logoutSuccess} from "../../../redux/features/authSlice";
 import {useDispatch} from "react-redux";
 import styles from './profile.module.scss';
 import defaultImage from '../../../assets/profile_default.jpg';
+import getEnvVar from "../../../redux/features/getEnvVars";
 
 const Profile = () => {
     const {data, isLoading, error} = useProfileQuery();
@@ -25,7 +26,7 @@ const Profile = () => {
     <div className={styles.profile}>
             <div className={styles.allitems}>
                 <div className={styles.picturebuttons}>
-                    <img className={styles.image} src={data.picture ? 'http://localhost:8080/' + data.picture : defaultImage} alt=""/>
+                    <img className={styles.image} src={data.picture ? `${getEnvVar('BACKEND_URL')}/` + data.picture : defaultImage} alt=""/>
                     <div className={styles.buttoncontainer}>
                     <div><Link to='/profile/edit'>
                         <svg fill="#253D4E" height="25px" width="30px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 306.637 306.637">
