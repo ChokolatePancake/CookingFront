@@ -21,10 +21,25 @@
   &:not(:first-child) {
     margin-top: 20px;
   }
+
+  transition: all 0.3s ease;
+
+  border: 1px solid $black;
+  box-shadow: 0 0 3px $light-black;
+
+  &:active, &:focus {
+    border: 1px solid $gray-green;
+    box-shadow: 0 0 5px 1px $gray-green;
+    outline: none;
+  }
 }
 
 .form {
   margin-top: 40px;
+}
+
+.signup {
+  margin-top: 10px;
 }
 
 .button {
@@ -32,3 +47,17 @@
   margin-top: 15px;
 }
 
+.error {
+  border: 1px solid $peach;
+  box-shadow: 0 0 8px 1px $peach;
+
+  &_message {
+    color: $white;
+    background-color: $peach;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    margin: 5px 0;
+  }
+}
