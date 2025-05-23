@@ -27,4 +27,8 @@
 
 .buttons_container {
   margin-top: 20px;
+
+  button:last-child {
+    margin-left: 10px;
+  }
 }

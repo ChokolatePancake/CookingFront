@@ -27,9 +27,11 @@ const Recipes = () => {
             <div className={styles.filters}>
                 <FormGroup>
                     <h4>Categories</h4>
-                    {recipeCategories.map((category) => (
-                        <FormControlLabel key={category} control={<Checkbox checked={categories.includes(category)} onChange={changeCetegories} />} label={category} />
-                    ))}
+                    <div className={styles.categories}>
+                        {recipeCategories.map((category) => (
+                            <FormControlLabel key={category} className={styles.category} control={<Checkbox checked={categories.includes(category)} onChange={changeCetegories} />} label={category} />
+                        ))}
+                    </div>
                     <div className={styles.slider}>
                         <h4>Cooking time</h4>
                         <Slider
