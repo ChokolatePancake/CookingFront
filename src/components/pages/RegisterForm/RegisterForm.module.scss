@@ -6,13 +6,37 @@
 }
 
 .form {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .input {
   &:not(:first-child) {
     margin-top: 15px;
   }
+
+  transition: all 0.3s ease;
+  border: 1px solid $black;
+  box-shadow: 0 0 3px $light-black;
+
+  &:active, &:focus {
+    border: 1px solid $gray-green;
+    box-shadow: 0 0 5px 1px $gray-green;
+    outline: none;
+  }
+}
+.error {
+  border: 1px solid $peach;
+  box-shadow: 0 0 8px 1px $peach;
+}
+
+.error_message {
+  color: $white;
+  background-color: $peach;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  margin: 5px 0;
 }
 
 .item {
@@ -23,7 +47,7 @@
   font-weight: 500;
   line-height: normal;
   align-items: center;
-  margin-top: 60px;
+  margin-top: 30px;
 }
 
 .button {
@@ -51,4 +75,5 @@
 
 .inputs {
   max-width: 330px;
+  padding-right: 15px;
 }

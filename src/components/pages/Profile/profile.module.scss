@@ -23,9 +23,10 @@
 }
 
 .logout {
-  margin-left: 90%;
+  margin-left: calc(100% - 101px);
   margin-top: 15px;
   background-color: $orange;
+  text-wrap: nowrap;
     &:hover {
       background-color: $peach;
       transition: all .8s ease-in-out;

@@ -20,11 +20,11 @@ const LoginForm = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        setErrors({ email: false, password: false, general: false });
-
+        
         try {
             const response = await userLogin({ email, password });
             if ('error' in response) {
+                setErrors({ email: false, password: false, general: false });
                 const errorData = response.error;
                 if (errorData.status === "PARSING_ERROR") {
                     setErrors(prev => ({ ...prev, email: true }));
