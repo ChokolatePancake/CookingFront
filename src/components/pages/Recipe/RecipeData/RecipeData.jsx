@@ -51,7 +51,7 @@ const RecipeData = ({ data, userData, recipeId }) => {
               <h3 className={styles.step}>Step {step.number}</h3>
               <div className={styles.step_info}>
                 {step.picture ? <img className={styles.picture} src={`${getEnvVar('BACKEND_URL')}/` + step.picture} alt="" /> : ''}
-                <p className={styles.step_description}>{step.text}</p>
+                <p className={`${styles.step_description} ${!step.picture ? styles.lm_rm : ''}`}>{step.text}</p>
               </div>
             </div>
           )

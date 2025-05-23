@@ -24,8 +24,12 @@ h1 {
   text-transform: uppercase;
   font-size: 48px;
   font-weight: 500;
-  word-wrap: anywhere;
+  word-break: break-all;
   hyphens: auto;
+}
+
+body {
+  margin: 0;
 }
 
 button {

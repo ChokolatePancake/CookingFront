@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
     useAddCommentMutation,
     useGetCommentsQuery,
     useProfileQuery,
     useRecipeQuery,
 } from '../../../redux/api/cookingForumApi';
-import {CircularProgress} from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import RecipeCommentBox from "../../UI/RecipeCommentBox/RecipeCommentBox";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import RecipeData from './RecipeData/RecipeData';
 import Avatar from '../../../assets/icons/avatar.png';
 import styles from './Recipe.module.scss';
 import getEnvVar from '../../../redux/features/getEnvVars';
 
 const Recipe = () => {
-    let {id} = useParams();
+    let { id } = useParams();
     let currentUser = null;
     const isAuth = useSelector(state => state.auth.isAuthenticated);
     const userData = useProfileQuery();
-    const {data, isLoading, error} = useRecipeQuery(id);
+    const { data, isLoading, error } = useRecipeQuery(id);
     const comments = useGetCommentsQuery(id);
     const [addComment, addCommentData] = useAddCommentMutation();
     if (isLoading || userData.isLoading || comments.isLoading) {
@@ -44,7 +44,7 @@ const Recipe = () => {
             userId: comment.authorId,
             comId: comment.id,
             fullName: comment.authorNickname,
-            avatarUrl: comment.picture ? `${getEnvVar('BACKEND_URL')}/`+ comment.picture : Avatar,
+            avatarUrl: comment.picture ? `${getEnvVar('BACKEND_URL')}/` + comment.picture : Avatar,
             userProfile: null,
             text: comment.message,
             replies: replies
@@ -65,13 +65,13 @@ const Recipe = () => {
         if (!parentCommentId) {
             parentCommentId = e.repliedToCommentId ? e.repliedToCommentId : null;
         }
-       const response = await addComment({
-           id: id,
-           body: {
-               message: e.text,
-               comment: parentCommentId,
-           },
-       });
+        const response = await addComment({
+            id: id,
+            body: {
+                message: e.text,
+                comment: { id: parentCommentId },
+            },
+        });
     }
 
     return (
