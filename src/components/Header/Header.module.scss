@@ -1,3 +1,5 @@
+@import "../../scss/media";
+
 .header {
   display: flex;
   align-items: center;
@@ -5,8 +7,20 @@
   padding: 15px 0;
 }
 
+.mobile_header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
 .logo {
   width: 70px;
+
+  @include breakpoint('mobileLarge') {
+    width: 50px;
+  }
 }
 
 .login {
@@ -17,10 +31,126 @@
   font-size: 20px;
   padding: 8px 12px;
   border-radius: 8px;
+
   &:hover {
     color: $green;
     background-color: $white;
     outline: solid 2px $green;
     transition: background-color .8s ease-in-out;
+  }
+}
+
+
+.burger {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 30px;
+  cursor: pointer;
+  margin-left: 20px;
+
+  &_line {
+    width: 100%;
+    height: 2px;
+    background-color: $black;
+    transition: all .3s ease-in-out;
+  }
+
+  &_content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 260px;
+    padding: 10px 25px;
+    background-color: $white;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 100%;
+    transition: all .3s ease-in-out;
+    cursor: default;
+
+    div:nth-child(2) {
+      margin-top: auto;
+      margin-left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: fit-content;
+      padding: 0;
+    }
+
+    &_line {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    &_close {
+      width: 30px;
+      height: 30px;
+      background-color: $white;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all .3s ease-in-out;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        width: 20px;
+        height: 20px;
+        color: $black;
+        transition: all .3s ease-in-out;
+      }
+
+      &:hover {
+        background-color: $green;
+        transition: all .3s ease-in-out;
+
+        svg {
+          color: $white;
+        }
+      }
+    }
+
+    &_active {
+      pointer-events: all !important;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      background-color: rgba(225, 225, 225, 0.7);
+      .burger_content {
+        left: calc(100% - 310px);
+      }
+    }
+
+    &_wrapper {
+      height: 100%;
+      width: 100%;
+      position: fixed;
+      pointer-events: none;
+      left: 0;
+      top: 0;
+      transition: all .3s ease-in-out;
+    }
+  }
+}
+
+.site_name {
+  font-size: 30px;
+  font-weight: 700;
+  color: $black;
+  text-decoration: none;
+
+  h1 {
+    font-size: 20px;
+
+    @include breakpoint('sm-phone') {
+      font-size: 17px;
+    }
   }
 }

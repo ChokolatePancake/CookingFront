@@ -1,7 +1,14 @@
+@import "../../../scss/media";
+
 .searchWrapper {
   width: 100%;
   display: flex;
   justify-content: center;
+
+  @include breakpoint('mobileLarge') {
+    width: 238px;
+    padding-right: 10px;
+  }
 }
 
 .search {
@@ -15,6 +22,11 @@
   border-radius:50%;
   width: 70px;
   height: 70px;
+
+  @include breakpoint('mobileLarge') {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 .result {
@@ -48,8 +60,15 @@
   margin-bottom: 0;
   text-decoration: none;
   transition: all 0.2s ease-in-out 0s;
+
   &:hover {
     background-color: $black;
     color: $white;
+  }
+
+  div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 20px;
   }
 }

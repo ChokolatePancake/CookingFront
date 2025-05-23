@@ -10,8 +10,14 @@ input,textarea {
   display:block;
 }
 
+
 a.active {
   color: $green;
+}
+
+// Remove blue highlight on links/buttons in mobile Chrome
+a, button, input, textarea, select, summary, div {
+  -webkit-tap-highlight-color: transparent;
 }
 
 input {
