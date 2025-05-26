@@ -70,7 +70,7 @@
     transition: all .3s ease-in-out;
     cursor: default;
 
-    div:nth-child(2) {
+    > div:nth-child(2) {
       margin-top: auto;
       margin-left: 0;
       display: flex;

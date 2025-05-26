@@ -3,6 +3,7 @@ import styles from './Search.module.scss';
 import {useSearchRecipeQuery} from "../../../redux/api/cookingForumApi";
 import {CircularProgress} from "@mui/material";
 import {Link} from "react-router-dom";
+import defaultImagw from '../../../assets/recipe_default.jpg';
 import getEnvVar from "../../../redux/features/getEnvVars";
 
 const Search = () => {
@@ -22,6 +23,9 @@ const Search = () => {
                             let recipeImage = '';
                             if (recipe.picture) {
                                 recipeImage = <img className={styles.picture} src={`${getEnvVar('BACKEND_URL')}/` + recipe.picture}/>;
+                            }
+                            else {
+                                recipeImage = <img className={styles.picture} src={defaultImagw}/>;
                             }
                             return <Link className={styles.recipe} to={`recipe/${recipe.id}`}>
                                 <div className={styles.name}>{recipe.name}</div>
